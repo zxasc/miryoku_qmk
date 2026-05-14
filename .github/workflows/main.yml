@@ -59,7 +59,7 @@ jobs:
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git fetch --unshallow
           revert=`git log --grep='^\[miryoku-github\]' --pretty='format:%H' | tr '\n' ' '`
-          git revert $revert
+          git revert $revert || git revert --skip
           for merge in ${{ matrix.merge }}
           do
             user=`echo "$merge" | cut -f 1 -d '/'`
